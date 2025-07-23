@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import "@/public/styles/globals.css";
-import Counter from "./components/shared/Counter";
+import { Counter, CounterDisplay } from "./components/shared";
 import { useState } from 'react';
 
 import logo from "@/public/images/logo.svg";
@@ -34,7 +34,8 @@ export function App() {
 
       <Card className="bg-card/50 backdrop-blur-sm border-muted">
         <CardContent className="pt-6">
-          <Counter count={count} onIncrement={onIncrement} onDecrement={onDecrement} />
+          <CounterDisplay count={count} />
+          <Counter onIncrement={onIncrement} onDecrement={onDecrement} />
         </CardContent>
       </Card>
     </div>
