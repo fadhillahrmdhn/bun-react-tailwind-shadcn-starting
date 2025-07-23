@@ -1,11 +1,22 @@
 import { Card, CardContent } from "@/components/ui/card";
 import "@/public/styles/globals.css";
 import Counter from "./components/shared/Counter";
+import { useState } from 'react';
 
 import logo from "@/public/images/logo.svg";
 import reactLogo from "@/public/images/react.svg";
 
 export function App() {
+  const [count, setCount] = useState(0);
+
+  const onIncrement = (): void => setCount(count + 1);
+
+  const onDecrement = (): void => {
+    if (count > 0) {
+      setCount(count - 1);
+    }
+  };
+
   return (
     <div className="container mx-auto p-8 text-center relative z-10">
       <div className="flex justify-center items-center gap-8 mb-8">
@@ -23,7 +34,7 @@ export function App() {
 
       <Card className="bg-card/50 backdrop-blur-sm border-muted">
         <CardContent className="pt-6">
-          <Counter/>
+          <Counter count={count} onIncrement={onIncrement} onDecrement={onDecrement} />
         </CardContent>
       </Card>
     </div>

@@ -1,27 +1,36 @@
 import { useState } from 'react';
 
-export default function Counter() {
-  const [count, setCount] = useState(0);
+interface CounterButtonsProps {
+  onIncrement: () => void;
+  onDecrement: () => void;
+}
 
-  function increment(): void {
-    setCount(count + 1);
-  }
+interface CounterProps extends CounterButtonsProps {
+  count: number;
+}
 
-  function decrement(): void {
-    if (count > 0){
-          setCount(count - 1);
-    }
-  }
-
+export default function Counter({ count, onIncrement, onDecrement }: CounterProps) {
   return (
     <div>
-      <h1 className='text-3xl font-bold mb-4'>Counter: {count}</h1>
-      <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2' type="button" onClick={increment}>
+      <CounterDisplay count={count} />
+      <CounterButtons onIncrement={onIncrement} onDecrement={onDecrement} />
+    </div>
+  );
+}
+
+export function CounterDisplay({ count }: { count: number }) {
+  return <h1 className="text-3xl font-bold mb-4">Counter: {count}</h1>;
+}
+
+export function CounterButtons({ onIncrement, onDecrement }: CounterButtonsProps) {
+  return (
+    <>
+      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2" type="button" onClick={onIncrement}>
         Increment
       </button>
-      <button className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' type="button" onClick={decrement}>
+      <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" type="button" onClick={onDecrement}>
         Decrement
       </button>
-    </div>
+    </>
   );
 }
