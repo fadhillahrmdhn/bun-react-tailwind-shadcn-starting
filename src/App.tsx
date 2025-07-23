@@ -17,6 +17,8 @@ export function App() {
     }
   };
 
+  const reset = (): void => setCount(0);
+
   return (
     <div className="container mx-auto p-8 text-center relative z-10">
       <div className="flex justify-center items-center gap-8 mb-8">
@@ -35,7 +37,7 @@ export function App() {
       <Card className="bg-card/50 backdrop-blur-sm border-muted">
         <CardContent className="pt-6">
           <CounterDisplay count={count} />
-          <Counter onIncrement={onIncrement} onDecrement={onDecrement} />
+          <Counter reset={reset} onIncrement={onIncrement} onDecrement={onDecrement} />
         </CardContent>
       </Card>
     </div>
