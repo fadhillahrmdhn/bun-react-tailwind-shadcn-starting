@@ -1,20 +1,23 @@
-# CounterApp
-  **CounterApp** is an interactive counter application built with modern technologies such as React, TypeScript, and Tailwind CSS
+# Profile Card Application
+
+**Profile Card Application** is a responsive web application built with React, TypeScript, and Tailwind CSS that displays personal profile information with social media integration.
 
 ---
+
 ## 🛠️ Build With
 
- - React 19 
- - TypeScript 
- - Tailwind CSS 
- -  Bun
-
+- React 19
+- TypeScript
+- Tailwind CSS
+- Bun
 
 ---
 
 ## :sparkles: Features
 
-- [x] **Interactive Counter** - Increment, decrement, dan reset counter
+- [x] **Profile Card Display** - Display personal profile information with responsive design
+- [x] **Social Media Links** - Button links to GitHub and LinkedIn
+- [x] **Responsive Design** - Optimal display on desktop and mobile
 
 ---
 
@@ -22,8 +25,13 @@
 
 Here are preview images of the app:
 
-![An old rock in the desert](/docs/images/ss_web.png)
----
+### :iphone: Mobile View
+
+![Mobile view of the profile card application](/docs/images/mobile.png)
+
+### :computer: Desktop View
+
+![Desktop view of the profile card application](/docs/images/desktop.png)
 
 ## :gear: Starting Project
 
@@ -57,25 +65,39 @@ bun start
 
 ```ts
 ├── 📁docs         // Documentation assets
-│   └── 📁images 
+│   └── 📁images
+│       ├── ss_web.png   // Screenshot of the web application
 ├── 📁src   // Main source directory
 │   └── 📁components    // Reusable UI components
 │       └── 📁shared    // Shared components
+│           ├── AvatarCustom.tsx
+│           ├── ButtonCustom.tsx
 │           ├── Counter.tsx
 │           ├── CounterDisplay.tsx
-│           └── index.ts
+│           ├── index.ts
+│           └── ProfileCard.tsx
 │       └── 📁ui    // Shadcn UI components
+│           ├── avatar.tsx
 │           ├── button.tsx
 │           ├── card.tsx
 │           ├── form.tsx
 │           ├── input.tsx
 │           ├── label.tsx
-│           ├── select.tsx
+│           └── select.tsx
+│   └── 📁data   // Data configuration
+│       ├── index.ts
+│       └── ProfileData.ts
 │   └── 📁hooks   // Custom hooks
+│   └── 📁interfaces  // TypeScript interfaces
+│       ├── index.ts
+│       ├── profile-card.interface.ts
 │   └── 📁lib   // Library functions
 │       ├── utils.ts    // Utility functions
 │   └── 📁pages   // Page components
 │   └── 📁public    // Public assets
+│       └── 📁assets    // Static assets
+│           ├── 📁images
+│           │   └── profile.jpg
 │       └── 📁images    // Image assets
 │           ├── logo.svg
 │           ├── react.svg
@@ -87,6 +109,7 @@ bun start
 │   └── 📁types   // TypeScript type definitions
 │   ├── APITester.tsx   // API testing component
 │   ├── App.tsx   // Main application component
+│   ├── declarations.d.ts // Type declarations
 │   ├── index.ts    // Entry point for the application
 │   ├── main.tsx    // Main entry file for the React application
 ├── .env    // Environment variables
@@ -99,6 +122,5 @@ bun start
 ├── package.json    // Project configuration
 ├── README.md   // Project documentation
 └── tsconfig.json   // TypeScript configuration
-
 
 ```
