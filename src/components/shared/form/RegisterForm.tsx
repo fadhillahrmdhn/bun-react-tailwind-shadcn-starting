@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
 import { BirthDate, SelectDemo } from '@/components/shared';
+import { Checkbox } from '@/components/ui/checkbox';
 import type { RegisterFormValues } from '@/interfaces/form-register.interface';
 
 export default function RegisterForm() {
@@ -15,7 +16,27 @@ export default function RegisterForm() {
     age: 0,
     birthDate: undefined,
     gender: '',
+    learningPath: [],
   };
+
+  const learningPaths = [
+    {
+      id: 'frontend',
+      label: 'Frontend',
+    },
+    {
+      id: 'backend',
+      label: 'Backend',
+    },
+    {
+      id: 'devops',
+      label: 'DevOps',
+    },
+    {
+      id: 'uiux',
+      label: 'UI/UX',
+    },
+  ];
 
   const form = useForm({
     defaultValues,
@@ -25,7 +46,9 @@ export default function RegisterForm() {
         description: `Welcome, ${value.name}! Your account has been created.`,
         duration: 3000,
       });
-      console.log(`Name: ${value.name}\nEmail: ${value.email}\nPassword: ${value.password}\nAge: ${value.age}\nBirth Date: ${value.birthDate?.toLocaleDateString('en-CA')}\nGender: ${value.gender}`);
+      console.log(
+        `Name: ${value.name}\nEmail: ${value.email}\nPassword: ${value.password}\nAge: ${value.age}\nBirth Date: ${value.birthDate?.toLocaleDateString('en-CA')}\nGender: ${value.gender}\nLearning Path: ${value.learningPath.join(', ')}`
+      );
     },
   });
 
@@ -101,19 +124,44 @@ export default function RegisterForm() {
               </div>
             )}
           </form.Field>
-          
+
           {/* Gender */}
           <form.Field name="gender">
             {(field) => (
               <div className="grid gap-1">
-                <Label className="text-left">
-                  Gender
-                </Label>
+                <Label className="text-left">Gender</Label>
                 <SelectDemo value={field.state.value} onChange={(value) => field.handleChange(value as 'male' | 'female')} />
               </div>
             )}
           </form.Field>
 
+          {/* Learning Path */}
+          <form.Field name="learningPath">
+            {(field) => {
+              return (
+                <div className="grid gap-2">
+                  <Label className="text-left">Learning Path</Label>
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-1">
+                    {learningPaths.map((item) => (
+                      <div key={item.id} className="flex items-center gap-3">
+                        <Checkbox
+                          id={item.id}
+                          checked={field.state.value.includes(item.id)}
+                          onCheckedChange={(checked) => {
+                            const newValue = checked ? [...field.state.value, item.id] : field.state.value.filter((v) => v !== item.id);
+                            field.handleChange(newValue);
+                          }}
+                        />
+                        <Label htmlFor={item.id} className="font-normal">
+                          {item.label}
+                        </Label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            }}
+          </form.Field>
 
           <Button type="submit" className="w-full">
             Register

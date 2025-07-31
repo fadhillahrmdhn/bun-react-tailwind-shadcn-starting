@@ -1,3 +1,4 @@
+
 export interface RegisterFormValues {
     name: string;
     email: string;
@@ -5,4 +6,5 @@ export interface RegisterFormValues {
     age: number;
     birthDate: Date | undefined;
     gender: 'male' | 'female' | '';
+    learningPath: string[];
 }

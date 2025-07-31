@@ -33,7 +33,7 @@ export function App() {
       {/* <ProfileCard src={profileData.image} name={profileData.name} description={profileData.description} linkedin={profileData.socialMedia[1].url} github={profileData.socialMedia[0].url} /> */}
 
       <RegisterForm />
-      <Toaster />
+      <Toaster position="top-center" />
 
     </div>
   );
