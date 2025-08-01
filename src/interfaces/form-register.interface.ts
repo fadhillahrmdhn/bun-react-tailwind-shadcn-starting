@@ -7,4 +7,8 @@ export interface RegisterFormValues {
     birthDate: Date | undefined;
     gender: 'male' | 'female' | '';
     learningPath: string[];
+    notes?: {
+        status: boolean;
+        content: string;
+    }; 
 }

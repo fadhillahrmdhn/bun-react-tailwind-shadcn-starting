@@ -9,11 +9,16 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-export function SelectDemo({  value, onChange}:{  value: string; onChange: (value: string) => void; }) {
+interface SelectDemoProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+export function SelectDemo({  value, onChange}: SelectDemoProps) {
   return (
     <Select value={value} onValueChange={onChange}>
       <SelectTrigger className="w-[180px]" >
-        <SelectValue  placeholder="Select a gender" />
+        <SelectValue placeholder="Select a gender" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>

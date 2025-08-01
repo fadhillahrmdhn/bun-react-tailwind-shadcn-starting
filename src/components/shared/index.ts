@@ -5,3 +5,4 @@ export * from './ProfileCard.tsx';
 export * from './ButtonCustom.tsx';
 export * from './BirthDate.tsx';
 export * from './Select.tsx';
+export * from './TextareaCustom.tsx';

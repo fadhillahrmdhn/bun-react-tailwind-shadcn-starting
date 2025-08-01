@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
-import { BirthDate, SelectDemo } from '@/components/shared';
+import { BirthDate, SelectDemo, TextareaCustom } from '@/components/shared';
 import { Checkbox } from '@/components/ui/checkbox';
 import type { RegisterFormValues } from '@/interfaces/form-register.interface';
 
@@ -17,6 +17,10 @@ export default function RegisterForm() {
     birthDate: undefined,
     gender: '',
     learningPath: [],
+    notes: {
+      status: false,
+      content: '',
+    },
   };
 
   const learningPaths = [
@@ -47,7 +51,9 @@ export default function RegisterForm() {
         duration: 3000,
       });
       console.log(
-        `Name: ${value.name}\nEmail: ${value.email}\nPassword: ${value.password}\nAge: ${value.age}\nBirth Date: ${value.birthDate?.toLocaleDateString('en-CA')}\nGender: ${value.gender}\nLearning Path: ${value.learningPath.join(', ')}`
+        `Name: ${value.name}\nEmail: ${value.email}\nPassword: ${value.password}\nAge: ${value.age}\nBirth Date: ${value.birthDate?.toLocaleDateString('en-CA')}\nGender: ${value.gender}\nLearning Path: ${value.learningPath.join(
+          ', '
+        )}\nNotes: ${value.notes.status ? value.notes.content : 'No notes provided'}`
       );
     },
   });
@@ -161,6 +167,23 @@ export default function RegisterForm() {
                 </div>
               );
             }}
+          </form.Field>
+
+          {/* Notes */}
+          <form.Field name="notes">
+            {(field) => (
+              <div className="grid gap-2 grid-cols-1">
+                <Label className="text-left">Add Notes</Label>                  
+                  <Checkbox 
+                    checked={field.state.value.status}
+                    onCheckedChange={(checked) => {
+                      const newValue = checked ? { ...field.state.value, status: true } : { ...field.state.value, status: false };
+                      field.handleChange(newValue);
+                    }}
+                  />
+                {field.state.value.status && <TextareaCustom value={field.state.value.content} onChange={(value) => field.handleChange({ ...field.state.value, content: value })} />}
+              </div>
+            )}
           </form.Field>
 
           <Button type="submit" className="w-full">
