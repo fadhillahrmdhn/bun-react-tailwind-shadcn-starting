@@ -2,8 +2,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import '@/public/styles/globals.css';
 // import { Counter, CounterDisplay } from './components/shared';
 // import { useState } from 'react';
-import { ProfileCard } from './components/shared';
+import { ProfileCard,DragonBallCharacterCard } from './components/shared';
 import { profileData } from './data';
+
 
 export function App() {
   // const [count, setCount] = useState(0);
@@ -28,7 +29,8 @@ export function App() {
           <Counter reset={reset} onIncrement={onIncrement} onDecrement={onDecrement} />
         </CardContent>
       </Card> */}
-      <ProfileCard src={profileData.image} name={profileData.name} description={profileData.description} linkedin={profileData.socialMedia[1].url} github={profileData.socialMedia[0].url} />
+      {/* <ProfileCard src={profileData.image} name={profileData.name} description={profileData.description} linkedin={profileData.socialMedia[1].url} github={profileData.socialMedia[0].url} /> */}
+      <DragonBallCharacterCard />
     </div>
   );
 }
