@@ -23,7 +23,7 @@ export function App() {
   
 
   return (
-    <div className="container mx-auto p-8 text-center relative z-10">
+    <div className="container mx-auto p-8 text-center relative z-10 grid grid-cols-1 gap-10">
 
       {/* <ProfileCard src={profileData.image} name={profileData.name} description={profileData.description} linkedin={profileData.socialMedia[1].url} github={profileData.socialMedia[0].url} /> */}
       <UseMemoCard />
