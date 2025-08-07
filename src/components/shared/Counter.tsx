@@ -7,7 +7,7 @@ interface CounterButtonsProps {
 
 export  function Counter({ onIncrement, onDecrement, reset }: CounterButtonsProps) {
   return (
-    <div>
+    <div className="flex flex-col md:flex-row justify-center items-center gap-4">
       <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2" type="button" onClick={onIncrement}>
         Increment
       </button>

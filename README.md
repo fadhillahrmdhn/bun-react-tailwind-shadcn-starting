@@ -1,6 +1,6 @@
-# Profile Card Application
+# Character Card & Counter App
 
-**Profile Card Application** is a responsive web application built with React, TypeScript, and Tailwind CSS that displays personal profile information with social media integration.
+**Character Card & Counter App** is a responsive web application built with React, TypeScript, and Tailwind CSS that features Dragon Ball character search with interactive cards and a counter system with modern state management.
 
 ---
 
@@ -10,14 +10,19 @@
 - TypeScript
 - Tailwind CSS
 - Bun
+- Zustand
+- Shadcn/ui
 
 ---
 
 ## :sparkles: Features
 
-- [x] **Profile Card Display** - Display personal profile information with responsive design
-- [x] **Social Media Links** - Button links to GitHub and LinkedIn
-- [x] **Responsive Design** - Optimal display on desktop and mobile
+- [x] **Character Search & Display** - Dragon Ball character search with API integration and real-time filtering
+- [x] **Loading Skeleton** - Smooth loading experience with Shadcn skeleton components during data fetching
+- [x] **useMemo Optimization** - Performance optimized character filtering using React useMemo hook
+- [x] **Dark/Light Theme Toggle** - Theme switching functionality
+- [x] **Counter with Zustand** - A counter functionality powered by Zustand for efficient state management.
+- [x] **Responsive Design** - Optimal display on desktop and mobile devices
 
 ---
 
@@ -25,13 +30,31 @@
 
 Here are preview images of the app:
 
-### :iphone: Mobile View
+### :iphone: Character Card Mobile
 
-![Mobile view of the profile card application](/docs/images/mobile.png)
+![Mobile view of character card with search functionality](/docs/images/card_mobile.png)
 
-### :computer: Desktop View
+### :desktop_computer: Character Card Desktop
 
-![Desktop view of the profile card application](/docs/images/desktop.png)
+![Desktop view of character card with search functionality](/docs/images/card_desktop.png)
+
+### :mag: Search Functionality
+
+![Character search functionality demonstration](/docs/images/card_search.png)
+
+### :iphone: Counter Mobile
+
+![Mobile view of counter component](/docs/images/counter_mobile.png)
+
+### :desktop_computer: Counter Desktop
+
+![Desktop view of counter component](/docs/images/counter_desktop.png)
+
+### :hourglass_flowing_sand: Loading Skeleton
+
+![Loading skeleton demonstration during data fetching](/docs/images/loading_skeleton.png)
+
+---
 
 ## :gear: Starting Project
 
@@ -66,53 +89,75 @@ bun start
 ```ts
 ├── 📁docs         // Documentation assets
 │   └── 📁images
-│       ├── ss_web.png   // Screenshot of the web application
+│       ├── card_desktop.png     // Desktop character card screenshot
+│       ├── card_mobile.png      // Mobile character card screenshot
+│       ├── card_search.png      // Search functionality screenshot
+│       ├── counter_desktop.png  // Desktop counter screenshot
+│       ├── counter_mobile.png   // Mobile counter screenshot
+│       ├── loading_skeleton.png // Loading skeleton screenshot
+│       ├── desktop.png          // Desktop screenshot
+│       ├── mobile.png           // Mobile screenshot
+│       └── ss_web.png           // Web screenshot
 ├── 📁src   // Main source directory
-│   └── 📁components    // Reusable UI components
-│       └── 📁shared    // Shared components
-│           ├── AvatarCustom.tsx
-│           ├── ButtonCustom.tsx
-│           ├── Counter.tsx
-│           ├── CounterDisplay.tsx
-│           ├── index.ts
-│           └── ProfileCard.tsx
-│       └── 📁ui    // Shadcn UI components
-│           ├── avatar.tsx
-│           ├── button.tsx
-│           ├── card.tsx
-│           ├── form.tsx
-│           ├── input.tsx
-│           ├── label.tsx
-│           └── select.tsx
-│   └── 📁data   // Data configuration
-│       ├── index.ts
-│       └── ProfileData.ts
-│   └── 📁hooks   // Custom hooks
-│   └── 📁interfaces  // TypeScript interfaces
-│       ├── index.ts
-│       ├── profile-card.interface.ts
-│   └── 📁lib   // Library functions
-│       ├── utils.ts    // Utility functions
-│   └── 📁pages   // Page components
-│   └── 📁public    // Public assets
-│       └── 📁assets    // Static assets
-│           ├── 📁images
-│           │   └── profile.jpg
-│       └── 📁images    // Image assets
-│           ├── logo.svg
-│           ├── react.svg
-│       └── 📁styles    // CSS Styles directory
-│           ├── globals.css
-│       ├── index.html    // Main HTML file
-│   └── 📁routes    // Application routes
-│   └── 📁stores    // Global state management (Zustand)
-│   └── 📁types   // TypeScript type definitions
+│   ├── 📁components    // Reusable UI components
+│   │   ├── 📁shared    // Shared components
+│   │   │   ├── AvatarCustom.tsx
+│   │   │   ├── ButtonCustom.tsx
+│   │   │   ├── ButtonTheme.tsx
+│   │   │   ├── CharacterCard.tsx
+│   │   │   ├── Counter.tsx
+│   │   │   ├── CounterDisplay.tsx
+│   │   │   ├── CounterZustand.tsx
+│   │   │   ├── ProfileCard.tsx
+│   │   │   ├── SearchBar.tsx
+│   │   │   └── index.ts
+│   │   └── 📁ui    // Shadcn UI components
+│   │       ├── avatar.tsx
+│   │       ├── button.tsx
+│   │       ├── calendar.tsx
+│   │       ├── card.tsx
+│   │       ├── checkbox.tsx
+│   │       ├── form.tsx
+│   │       ├── input.tsx
+│   │       ├── label.tsx
+│   │       ├── popover.tsx
+│   │       ├── select.tsx
+│   │       ├── skeleton.tsx
+│   │       ├── sonner.tsx
+│   │       └── textarea.tsx
+│   ├── 📁context   // React context providers
+│   │   └── ThemeContext.tsx
+│   ├── 📁data   // Data configuration
+│   │   ├── index.ts
+│   │   └── ProfileData.ts
+│   ├── 📁hooks   // Custom hooks
+│   │   ├── index.ts
+│   │   └── useMemoCard.tsx
+│   ├── 📁interfaces  // TypeScript interfaces
+│   │   ├── index.ts
+│   │   ├── profile-card.interface.ts
+│   │   └── theme.interface.ts
+│   ├── 📁lib   // Library functions
+│   │   └── utils.ts    // Utility functions
+│   ├── 📁public    // Public assets
+│   │   ├── 📁assets    // Static assets
+│   │   │   └── 📁images
+│   │   │       └── profile.jpg
+│   │   ├── 📁images    // Image assets
+│   │   │   ├── logo.svg
+│   │   │   └── react.svg
+│   │   ├── 📁styles    // CSS Styles directory
+│   │   │   └── globals.css
+│   │   └── index.html    // Main HTML file
+│   ├── 📁store    // Global state management (Zustand)
+│   ├── 📁types   // TypeScript type definitions
+│   │   ├── index.ts
+│   │   └── theme.type.ts
 │   ├── APITester.tsx   // API testing component
 │   ├── App.tsx   // Main application component
 │   ├── declarations.d.ts // Type declarations
 │   ├── index.ts    // Entry point for the application
-│   ├── main.tsx    // Main entry file for the React application
-├── .env    // Environment variables
+│   └── main.tsx    // Main entry file for the React application
 ├── .gitignore    // Git ignore file
 ├── build.ts    // Build script
 ├── bun-env.d.ts    // Type definitions for Bun environment
