@@ -7,3 +7,4 @@ export * from './CharacterCard.tsx';
 export * from './SearchBar.tsx';
 export * from './ButtonTheme.tsx';
 export * from './CounterZustand.tsx';
+export * from './SkeletonCustom.tsx';

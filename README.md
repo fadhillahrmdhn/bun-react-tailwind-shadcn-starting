@@ -18,6 +18,7 @@
 ## :sparkles: Features
 
 - [x] **Character Search & Display** - Dragon Ball character search with API integration and real-time filtering
+- [x] **Loading Skeleton** - Smooth loading experience with Shadcn skeleton components during data fetching
 - [x] **useMemo Optimization** - Performance optimized character filtering using React useMemo hook
 - [x] **Dark/Light Theme Toggle** - Theme switching functionality
 - [x] **Counter with Zustand** - A counter functionality powered by Zustand for efficient state management.
@@ -48,6 +49,12 @@ Here are preview images of the app:
 ### :desktop_computer: Counter Desktop
 
 ![Desktop view of counter component](/docs/images/counter_desktop.png)
+
+### :hourglass_flowing_sand: Loading Skeleton
+
+![Loading skeleton demonstration during data fetching](/docs/images/loading_skeleton.png)
+
+---
 
 ## :gear: Starting Project
 
@@ -82,9 +89,15 @@ bun start
 ```ts
 ├── 📁docs         // Documentation assets
 │   └── 📁images
-│       ├── desktop.png      // Desktop screenshot
-│       ├── mobile.png       // Mobile screenshot
-│       └── ss_web.png       // Web screenshot
+│       ├── card_desktop.png     // Desktop character card screenshot
+│       ├── card_mobile.png      // Mobile character card screenshot
+│       ├── card_search.png      // Search functionality screenshot
+│       ├── counter_desktop.png  // Desktop counter screenshot
+│       ├── counter_mobile.png   // Mobile counter screenshot
+│       ├── loading_skeleton.png // Loading skeleton screenshot
+│       ├── desktop.png          // Desktop screenshot
+│       ├── mobile.png           // Mobile screenshot
+│       └── ss_web.png           // Web screenshot
 ├── 📁src   // Main source directory
 │   ├── 📁components    // Reusable UI components
 │   │   ├── 📁shared    // Shared components
@@ -109,6 +122,7 @@ bun start
 │   │       ├── label.tsx
 │   │       ├── popover.tsx
 │   │       ├── select.tsx
+│   │       ├── skeleton.tsx
 │   │       ├── sonner.tsx
 │   │       └── textarea.tsx
 │   ├── 📁context   // React context providers

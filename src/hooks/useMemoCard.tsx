@@ -3,10 +3,12 @@ import { useEffect, useMemo, useState } from 'react';
 import type { Character } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/card';
 import { DragonBallCharacterCard, SearchBar, ButtonTheme } from '@/components/shared';
+import { SkeletonCard } from '@/components/shared';
 
 export const UseMemoCard = () => {
   const [search, setSearch] = useState<string>('');
   const [character, setCharacter] = useState<Character[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     fetch('https://dragonball-api.com/api/characters')
       .then((response) => response.json())
@@ -21,6 +23,12 @@ export const UseMemoCard = () => {
             image: item.image,
           }))
         );
+      })
+      .catch((error) => {
+        console.error("Error fetching characters:", error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
   const filteredCharacters = useMemo(() => {
@@ -34,7 +42,13 @@ export const UseMemoCard = () => {
         <SearchBar search={search} setSearch={setSearch} />
       </div>
 
-      {filteredCharacters.length > 0 ? (
+      {loading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {Array.from({ length: 8 }).map((_, index) => (
+            <SkeletonCard key={index} />
+          ))}
+        </div>
+      ) : filteredCharacters.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {filteredCharacters.map((char) => (
             <DragonBallCharacterCard key={char.id} char={char} />
