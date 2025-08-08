@@ -1,4 +1,4 @@
-import { CounterZustand } from "@/components/shared";
+import { CounterZustand } from '@/components/shared';
 
 export const CounterZustandPage = () => {
   return (
@@ -6,4 +6,4 @@ export const CounterZustandPage = () => {
       <CounterZustand />
     </div>
   );
-}
+};

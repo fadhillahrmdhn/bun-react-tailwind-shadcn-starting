@@ -2,7 +2,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import '@/public/styles/globals.css';
 import { Counter, CounterDisplay } from './components/shared';
 import { useState } from 'react';
-import { ProfileCard,DragonBallCharacterCard, CounterZustand} from './components/shared';
+import { ProfileCard,DragonBallCharacterCard, CounterZustand, NavigationMenuDemo} from './components/shared';
 import { profileData } from './data';
 import { Routes, Route, Link } from "react-router-dom";
 import { CounterZustandPage, UseMemoCardPage } from './pages';
@@ -24,27 +24,20 @@ export function App() {
   
 
   return (
-    <div className="container mx-auto p-8 text-center relative z-10 grid grid-cols-1 gap-10">
-
-      {/* <ProfileCard src={profileData.image} name={profileData.name} description={profileData.description} linkedin={profileData.socialMedia[1].url} github={profileData.socialMedia[0].url} /> */}
-      <nav>
-        <ul className='flex gap-4'>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/counter">Counter Zustand</Link>
-          </li>
-          <li>
-            <Link to="/card">Use Memo Card</Link>
-          </li>
-        </ul>
-      </nav>
-
-    <Routes>
-      <Route path='/counter' element={<CounterZustandPage />} />
-      <Route path='/card' element={<UseMemoCardPage />} />
-    </Routes>
+    <div className="min-h-screen min-w-screen">
+      <header className="border-b sticky top-0 z-10 bg-background/95 backdrop-blur-sm">
+        <nav className="container mx-auto flex items-center justify-center p-4">
+          <NavigationMenuDemo />
+        </nav>
+      </header>
+      <main className='flex-grow'>
+        <div className="container mx-auto p-8 text-center">
+          <Routes>
+            <Route path="/counter" element={<CounterZustandPage />} />
+            <Route path="/card" element={<UseMemoCardPage />} />
+          </Routes>
+        </div>
+      </main>
     </div>
   );
 }

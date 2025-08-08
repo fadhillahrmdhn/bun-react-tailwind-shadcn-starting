@@ -13,13 +13,11 @@ export const CounterZustand = () => {
     }))
   );
   return (
-    <div>
-      <Card className="bg-card/50 backdrop-blur-sm border-muted">
+      <Card className="bg-card/50 backdrop-blur-sm border-muted w-[400px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <CardContent className="pt-6">
           <CounterDisplay count={count} />
           <Counter reset={reset} onIncrement={increment} onDecrement={decrement} />
         </CardContent>
       </Card>
-    </div>
   );
 };
