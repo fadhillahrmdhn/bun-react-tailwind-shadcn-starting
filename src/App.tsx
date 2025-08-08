@@ -4,7 +4,8 @@ import { Counter, CounterDisplay } from './components/shared';
 import { useState } from 'react';
 import { ProfileCard,DragonBallCharacterCard, CounterZustand} from './components/shared';
 import { profileData } from './data';
-import { UseMemoCard } from './hooks';
+import { Routes, Route, Link } from "react-router-dom";
+import { CounterZustandPage, UseMemoCardPage } from './pages';
 
 
 
@@ -26,8 +27,24 @@ export function App() {
     <div className="container mx-auto p-8 text-center relative z-10 grid grid-cols-1 gap-10">
 
       {/* <ProfileCard src={profileData.image} name={profileData.name} description={profileData.description} linkedin={profileData.socialMedia[1].url} github={profileData.socialMedia[0].url} /> */}
-      <UseMemoCard />
-      <CounterZustand />
+      <nav>
+        <ul className='flex gap-4'>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/counter">Counter Zustand</Link>
+          </li>
+          <li>
+            <Link to="/card">Use Memo Card</Link>
+          </li>
+        </ul>
+      </nav>
+
+    <Routes>
+      <Route path='/counter' element={<CounterZustandPage />} />
+      <Route path='/card' element={<UseMemoCardPage />} />
+    </Routes>
     </div>
   );
 }
