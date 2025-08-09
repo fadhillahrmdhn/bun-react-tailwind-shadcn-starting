@@ -24,13 +24,13 @@ export function App() {
   
 
   return (
-    <div className="min-h-screen">
+    <div>
       <header>
-        <nav className=" w-full sticky top-0 z-10  backdrop-blur-sm flex items-center justify-center p-4">
+        <nav className="fixed top-0 left-0 w-full z-50 border-b bg-background/90 p-2 backdrop-blur-sm">
           <NavigationMenuDemo />
         </nav>
       </header>
-      <main className='flex-grow'>
+      <main className='flex-grow pt-16'>
         <div className="container mx-auto p-8 text-center">
           <Routes>
             <Route path="/counter" element={<CounterZustandPage />} />
