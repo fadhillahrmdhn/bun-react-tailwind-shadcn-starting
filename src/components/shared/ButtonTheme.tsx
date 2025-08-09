@@ -6,7 +6,7 @@ export const ButtonTheme = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="flex justify-end lg:justify-start">
+    <div className="flex justify-end md:justify-start">
       <Button className="cursor-pointer flex" variant="outline" onClick={toggleTheme}>
         {theme === 'light' ? 
         (

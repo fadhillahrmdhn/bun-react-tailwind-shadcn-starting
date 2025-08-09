@@ -7,7 +7,7 @@ export const SearchBar = ( { search, setSearch }: { search: string; setSearch: (
 
   return (
     <div className="flex flex-col gap-10">
-      <Input className='bg-white dark:bg-gray-800 w-full lg:w-3/4 self-end' type="text" placeholder="Search characters..." value={search} onChange={(e) => setSearch(e.target.value)} />
+      <Input className='bg-white dark:bg-gray-800 w-full md:w-3/4 lg:w-1/2 self-end' type="text" placeholder="Search characters..." value={search} onChange={(e) => setSearch(e.target.value)} />
     </div>
   );
 }
