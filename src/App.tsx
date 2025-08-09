@@ -24,9 +24,9 @@ export function App() {
   
 
   return (
-    <div className="min-h-screen min-w-screen">
-      <header className="border-b sticky top-0 z-10 bg-background/95 backdrop-blur-sm">
-        <nav className="container mx-auto flex items-center justify-center p-4">
+    <div className="min-h-screen">
+      <header>
+        <nav className=" w-full sticky top-0 z-10  backdrop-blur-sm flex items-center justify-center p-4">
           <NavigationMenuDemo />
         </nav>
       </header>
