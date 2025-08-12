@@ -1,8 +1,8 @@
 import { use, useEffect, useState } from 'react';
-import type { Character } from '@/types';
+import type { DragonballItem } from '@/interfaces';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '../ui/card';
 
-export const DragonBallCharacterCard = ({ char }: { char: Character }) => {
+export const DragonBallCharacterCard = ({ char }: { char: DragonballItem }) => {
   return (
     <div>
         <Card key={char.id} className="items-center p-4 text-center dark:bg-gray-800">

@@ -17,7 +17,7 @@ export const Route = createRootRoute({
           <Outlet />
         </main>
       </ThemeProvider>
-      <TanStackRouterDevtools />
+      {process.env.NODE_ENV !== "production" && <TanStackRouterDevtools />}
     </>
   ),
 });

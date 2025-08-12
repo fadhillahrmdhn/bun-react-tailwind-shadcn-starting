@@ -1,39 +1,37 @@
 import { Input } from '@/components/ui/input';
 import { useEffect, useMemo, useState } from 'react';
-import type { Character } from '@/types';
+import type { DragonballItem, DragonballResponse } from '@/interfaces';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/card';
 import { DragonBallCharacterCard, SearchBar, ButtonTheme } from '@/components/shared';
 import { SkeletonCard } from '@/components/shared';
+import { api } from '@/lib/api';
 
 export const UseMemoCard = () => {
   const [search, setSearch] = useState<string>('');
-  const [character, setCharacter] = useState<Character[]>([]);
+  const [dragonball, setDragonball] = useState<DragonballResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const getDragonballData = async (): Promise<DragonballResponse | null> => {
+    try {
+      const response = await api.get<DragonballResponse>('/characters');
+      const dragonballData = response.data;
+      if (dragonballData) {
+        setDragonball(dragonballData);
+      }
+    } catch (error) {
+      console.error("Error fetching Dragonball data:", error);
+    }finally {
+      setLoading(false);
+    }
+    return null;
+  }
+
   useEffect(() => {
-    fetch('https://dragonball-api.com/api/characters')
-      .then((response) => response.json())
-      .then((data) => {
-        setCharacter(
-          data.items.map((item: Character) => ({
-            id: item.id,
-            name: item.name,
-            ki: item.ki,
-            race: item.race,
-            gender: item.gender,
-            image: item.image,
-          }))
-        );
-      })
-      .catch((error) => {
-        console.error("Error fetching characters:", error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    getDragonballData();
   }, []);
   const filteredCharacters = useMemo(() => {
-    return character.filter((char: Character) => char.name.toLowerCase().includes(search.toLowerCase())).sort((a, b) => a.name.localeCompare(b.name));
-  }, [search, character]);
+    return (dragonball?.items ?? []).filter((char: DragonballItem) => char.name.toLowerCase().includes(search.toLowerCase())).sort((a, b) => a.name.localeCompare(b.name));
+  }, [search, dragonball]);
 
   return (
     <div className="flex flex-col gap-10">
