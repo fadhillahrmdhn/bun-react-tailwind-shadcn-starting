@@ -1,7 +1,5 @@
-import { Input } from '@/components/ui/input';
 import { useEffect, useMemo, useState } from 'react';
 import type { DragonballItem, DragonballResponse } from '@/interfaces';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/card';
 import { DragonBallCharacterCard, SearchBar, ButtonTheme } from '@/components/shared';
 import { SkeletonCard } from '@/components/shared';
 import { api } from '@/lib/api';
@@ -11,7 +9,7 @@ export const UseMemoCard = () => {
   const [dragonball, setDragonball] = useState<DragonballResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const getDragonballData = async (): Promise<DragonballResponse | null> => {
+  const getDragonballData = async (): Promise<void> => {
     try {
       const response = await api.get<DragonballResponse>('/characters');
       const dragonballData = response.data;
@@ -20,10 +18,9 @@ export const UseMemoCard = () => {
       }
     } catch (error) {
       console.error("Error fetching Dragonball data:", error);
-    }finally {
+    } finally {
       setLoading(false);
     }
-    return null;
   }
 
   useEffect(() => {
