@@ -4,7 +4,7 @@ import { ButtonCustom } from './ButtonCustom';
 
 export const ProfileCard = ({ src, name, description, linkedin, github }: { src: string; name: string; description: string; linkedin: string; github: string }) => {
   return (
-    <Card className="flex flex-col items-center p-4 text-center lg:flex-row lg:items-start lg:text-left">
+    <Card className="flex flex-col items-center p-4 text-center max-w-xs">
       <CardHeader className="p-2">
         <AvatarCustom src={src} />
       </CardHeader>
