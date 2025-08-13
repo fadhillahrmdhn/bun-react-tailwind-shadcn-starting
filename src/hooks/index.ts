@@ -1,1 +1,1 @@
-export * from './useMemoCard';
+export * from '../components/shared/dragonball/FetchDragonBall';
