@@ -9,7 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import type { Limit } from '@/types';
 
-export const UseMemoCard = () => {
+export const DragonBall = () => {
   const [search, setSearch] = useState<string>('');
   const [limit, setLimit] = useState<Limit>('10');
   const [page, setPage] = useState<number>(1);

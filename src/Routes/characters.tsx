@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { UseMemoCard } from '@/components/shared';
+import { DragonBall } from '@/components/shared';
 
 export const Route = createFileRoute('/characters')({
   component: Character,
@@ -7,6 +7,6 @@ export const Route = createFileRoute('/characters')({
 
 function Character() {
   return (
-    <UseMemoCard />
+    <DragonBall />
   )
 }
