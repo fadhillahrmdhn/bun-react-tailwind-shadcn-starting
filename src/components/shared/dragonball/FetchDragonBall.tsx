@@ -55,7 +55,7 @@ export const DragonBall = () => {
   }, [search, data]);
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="grid grid-cols-1 gap-10">
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-0">
         <ButtonTheme />
         <SearchBar search={search} setSearch={setSearch} />
@@ -67,7 +67,9 @@ export const DragonBall = () => {
           <Skeleton className="h-64 w-full" />
         </div>
       ) : filteredCharacters.length > 0 ? (
-        <DataTable columns={columns} data={filteredCharacters} />
+        <div className=''>
+        <DataTable columns={columns} data={filteredCharacters} />          
+        </div>
       ) : (
         <div className="text-center p-4">
           <p>No characters found.</p>
