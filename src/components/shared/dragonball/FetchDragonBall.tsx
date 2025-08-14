@@ -46,13 +46,14 @@ export const DragonBall = () => {
       toast.error('Error fetching Dragonball data', {
         description: 'Please try again later.',
       });
-      return fallback;
+      throw error;
     }
   }, [page, limit]);
 
-  const { isPending, isError, data, error, isLoading } = useQuery({
+  const { isPending, isError, data, error} = useQuery({
     queryKey: ['characters', page, limit],
     queryFn: getDragonballData,
+    retry: false,
   });
 
   const filteredCharacters = useMemo(() => {
@@ -81,7 +82,7 @@ export const DragonBall = () => {
         {/* <SearchBar search={search} setSearch={setSearch} /> */}
       </div>
 
-      {isPending && !data ? (
+      {isPending ? (
         <div className="space-y-2">
           <Skeleton className="h-12 w-full" />
           <Skeleton className="h-64 w-full" />
