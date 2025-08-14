@@ -99,7 +99,7 @@ export const DragonBall = () => {
 
           {Array.from({ length: totalPages }, (_, i) => (
             <PaginationItem key={i} className='cursor-pointer'>
-              <PaginationLink onClick={() => handlePageClick(i + 1)}>{i + 1}</PaginationLink>
+              <PaginationLink onClick={() => handlePageClick(i + 1)} isActive={currentPage === i + 1}>{i + 1}</PaginationLink>
             </PaginationItem>
           ))}
 
