@@ -9,6 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
 
 import type { Limit } from '@/types';
+import { toast } from 'sonner';
 
 export const DragonBall = () => {
   const [search, setSearch] = useState<string>('');
@@ -42,6 +43,9 @@ export const DragonBall = () => {
       return response.data || fallback;
     } catch (error) {
       console.error('Error fetching Dragonball data:', error);
+      toast.error('Error fetching Dragonball data',{
+        description: 'Please try again later.',
+      });
       return fallback;
     }
   }, [page, limit]);
