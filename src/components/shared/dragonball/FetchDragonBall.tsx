@@ -43,7 +43,7 @@ export const DragonBall = () => {
       return response.data || fallback;
     } catch (error) {
       console.error('Error fetching Dragonball data:', error);
-      toast.error('Error fetching Dragonball data',{
+      toast.error('Error fetching Dragonball data', {
         description: 'Please try again later.',
       });
       return fallback;
@@ -91,9 +91,7 @@ export const DragonBall = () => {
           <DataTable columns={columns} data={data?.items ?? []} />
         </div>
       ) : (
-        <div className="text-center p-4">
-          <p>No characters found.</p>
-        </div>
+        <DataTable columns={columns} data={[]} />
       )}
       <Pagination>
         <PaginationContent>
@@ -102,8 +100,10 @@ export const DragonBall = () => {
           </PaginationItem>
 
           {Array.from({ length: totalPages }, (_, i) => (
-            <PaginationItem key={i} className='cursor-pointer'>
-              <PaginationLink onClick={() => handlePageClick(i + 1)} isActive={currentPage === i + 1}>{i + 1}</PaginationLink>
+            <PaginationItem key={i} className="cursor-pointer">
+              <PaginationLink onClick={() => handlePageClick(i + 1)} isActive={currentPage === i + 1}>
+                {i + 1}
+              </PaginationLink>
             </PaginationItem>
           ))}
 
@@ -112,7 +112,7 @@ export const DragonBall = () => {
           </PaginationItem> */}
 
           <PaginationItem className={currentPage === totalPages ? 'pointer-events-none opacity-40' : 'cursor-pointer'}>
-            <PaginationNext  onClick={handleNextPage} />
+            <PaginationNext onClick={handleNextPage} />
           </PaginationItem>
         </PaginationContent>
       </Pagination>
