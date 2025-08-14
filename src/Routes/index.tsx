@@ -1,18 +1,24 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
+import Typewriter from 'typewriter-effect';
 
 export const Route = createFileRoute('/')({
   component: Index,
-})
+});
 
 function Index() {
   return (
-
-
-<section className=" dark:bg-gray-900">
-    <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
-        <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Welcome to My Website</h1>
-    </div>
-</section>
-
-  )
+    <section className="dark:bg-gray-900">
+      <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
+        <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+          <Typewriter
+            options={{
+              strings: ['Welcome to My Website'],
+              autoStart: true,
+              loop: true,
+            }}
+          />
+        </h1>
+      </div>
+    </section>
+  );
 }
