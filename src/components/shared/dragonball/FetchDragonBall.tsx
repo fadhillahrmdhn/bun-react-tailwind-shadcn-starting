@@ -1,4 +1,4 @@
-import { useMemo, useState, useCallback } from 'react';
+import { useMemo, useState, useCallback, useEffect } from 'react';
 import type { DragonballItem, DragonballResponse } from '@/interfaces';
 import { SearchBar, ButtonTheme } from '@/components/shared';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -43,9 +43,6 @@ export const DragonBall = () => {
       return response.data || fallback;
     } catch (error) {
       console.error('Error fetching Dragonball data:', error);
-      toast.error('Error fetching Dragonball data', {
-        description: 'Please try again later.',
-      });
       throw error;
     }
   }, [page, limit]);
@@ -53,8 +50,15 @@ export const DragonBall = () => {
   const { isPending, isError, data, error} = useQuery({
     queryKey: ['characters', page, limit],
     queryFn: getDragonballData,
-    retry: false,
   });
+
+    useEffect(() => {
+    if (isError) {
+      toast.error('Error fetching Dragonball data', {
+        description: 'Please try again later.',
+      });
+    }
+  }, [isError]);
 
   const filteredCharacters = useMemo(() => {
     return (data?.items ?? []).filter((char: DragonballItem) => char.name.toLowerCase().includes(search.toLowerCase())).sort((a, b) => a.id - b.id);
@@ -88,7 +92,8 @@ export const DragonBall = () => {
           <Skeleton className="h-64 w-full" />
         </div>
       ) : filteredCharacters.length > 0 ? (
-        <div className="">
+        
+        <div>
           <DataTable columns={columns} data={data?.items ?? []} />
         </div>
       ) : (
