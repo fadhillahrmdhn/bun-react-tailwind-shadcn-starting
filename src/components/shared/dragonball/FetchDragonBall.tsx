@@ -88,8 +88,8 @@ export const DragonBall = () => {
 
       {isPending ? (
         <div className="space-y-2">
-          <Skeleton className="h-12 w-full" />
-          <Skeleton className="h-64 w-full" />
+          <Skeleton className="h-12 w-xs md:w-2xl" />
+          <Skeleton className="h-64 w-xs md:w-2xl" />
         </div>
       ) : filteredCharacters.length > 0 ? (
         
