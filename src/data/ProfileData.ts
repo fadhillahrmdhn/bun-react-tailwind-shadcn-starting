@@ -4,7 +4,7 @@ import src from "@/public/assets/images/profile.jpg";
 
 export const profileData: ProfileData = {
     name: "Fadhillah Ramadhan",
-    description: "Web Developer",
+    description: "Hello, I am passionate about software development, especially web development.",
     image: src,
     socialMedia: [
         {
