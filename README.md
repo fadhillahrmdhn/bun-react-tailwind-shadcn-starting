@@ -1,6 +1,6 @@
-# Character Card & Counter App
+# Dragon Ball Z Character Hub & Profile Dashboard
 
-**Character Card & Counter App** is a responsive web application built with React, TypeScript, and Tailwind CSS that features Dragon Ball character search with interactive cards and a counter system with modern state management.
+**Dragon Ball Z Character Hub & Profile Dashboard** is a responsive web application built with a modern React stack, including React 19, TypeScript, and Tailwind CSS. This project focuses on implementing routing, data fetching, state management, and table views using TanStack and Shadcn UI, enhanced with Skeleton for displaying placeholders while data is being fetched, as well as toast notifications to inform users of any errors.
 
 ---
 
@@ -12,47 +12,49 @@
 - Bun
 - Zustand
 - Shadcn/ui
+- TanStack Router
+- TanStack Table
+- TanStack Query
+- Axios
+- Sonner
 
 ---
 
 ## :sparkles: Features
 
-- [x] **Character Search & Display** - Dragon Ball character search with API integration and real-time filtering
+- [x] **Character Table** -  Explore Dragon Ball characters in a table powered by TanStack Table.
 - [x] **Loading Skeleton** - Smooth loading experience with Shadcn skeleton components during data fetching
-- [x] **useMemo Optimization** - Performance optimized character filtering using React useMemo hook
 - [x] **Dark/Light Theme Toggle** - Theme switching functionality
-- [x] **Counter with Zustand** - A counter functionality powered by Zustand for efficient state management.
 - [x] **Responsive Design** - Optimal display on desktop and mobile devices
+- [x] **Toast Notification** - Display notifications to users when an error happens.
+- [x] **Profile Page** - "Display the user profile page.
 
 ---
 
 ## :framed_picture: Screenshots
 
-Here are preview images of the app:
+Here are some preview images of the app:
 
-### :iphone: Character Card Mobile
+### :desktop_computer: Character Table
 
-![Mobile view of character card with search functionality](/docs/images/card_mobile.png)
+![Dragon Ball character table](/docs/images/table.png)
 
-### :desktop_computer: Character Card Desktop
 
-![Desktop view of character card with search functionality](/docs/images/card_desktop.png)
+### :iphone: Mobile view  of Character Table
 
-### :mag: Search Functionality
-
-![Character search functionality demonstration](/docs/images/card_search.png)
-
-### :iphone: Counter Mobile
-
-![Mobile view of counter component](/docs/images/counter_mobile.png)
-
-### :desktop_computer: Counter Desktop
-
-![Desktop view of counter component](/docs/images/counter_desktop.png)
+![Mobile view](/docs/images/mobile_pagination.png)
 
 ### :hourglass_flowing_sand: Loading Skeleton
 
-![Loading skeleton demonstration during data fetching](/docs/images/loading_skeleton.png)
+![Loading skeleton demonstration during data fetching](/docs/images/Skeleton.png)
+
+### :desktop_computer: Toast Notification
+
+![Toast notification demonstration](/docs/images/toast.png)
+
+### :desktop_computer: Profile Page
+
+![Profile page view](/docs/images/profile.png)
 
 ---
 
@@ -86,21 +88,23 @@ bun start
 
 ## :file_folder: Project Structure
 
-```ts
+```plaintext
 ├── 📁docs         // Documentation assets
 │   └── 📁images
-│       ├── card_desktop.png     // Desktop character card screenshot
-│       ├── card_mobile.png      // Mobile character card screenshot
-│       ├── card_search.png      // Search functionality screenshot
-│       ├── counter_desktop.png  // Desktop counter screenshot
-│       ├── counter_mobile.png   // Mobile counter screenshot
-│       ├── loading_skeleton.png // Loading skeleton screenshot
-│       ├── desktop.png          // Desktop screenshot
-│       ├── mobile.png           // Mobile screenshot
-│       └── ss_web.png           // Web screenshot
+│       ├── home.png               // Home page screenshot
+│       ├── mobile_pagination.png  // Mobile pagination screenshot
+│       ├── profile.png            // Profile page screenshot
+│       ├── Skeleton.png           // Loading skeleton screenshot
+│       ├── table.png              // Table component screenshot
+│       └── toast.png              // Toast notification screenshot
 ├── 📁src   // Main source directory
-│   ├── 📁components    // Reusable UI components
-│   │   ├── 📁shared    // Shared components
+│   ├── 📁components
+│   │   ├── 📁shared
+│   │   │   ├── 📁dragonball
+│   │   │   │   ├── columns.tsx
+│   │   │   │   ├── data-table.tsx
+│   │   │   │   ├── FetchDragonBall.tsx
+│   │   │   │   └── index.ts
 │   │   │   ├── AvatarCustom.tsx
 │   │   │   ├── ButtonCustom.tsx
 │   │   │   ├── ButtonTheme.tsx
@@ -108,64 +112,78 @@ bun start
 │   │   │   ├── Counter.tsx
 │   │   │   ├── CounterDisplay.tsx
 │   │   │   ├── CounterZustand.tsx
+│   │   │   ├── index.ts
+│   │   │   ├── navbar.tsx
 │   │   │   ├── ProfileCard.tsx
 │   │   │   ├── SearchBar.tsx
-│   │   │   └── index.ts
-│   │   └── 📁ui    // Shadcn UI components
+│   │   │   └── SkeletonCustom.tsx
+│   │   └── 📁ui
 │   │       ├── avatar.tsx
 │   │       ├── button.tsx
-│   │       ├── calendar.tsx
 │   │       ├── card.tsx
-│   │       ├── checkbox.tsx
 │   │       ├── form.tsx
 │   │       ├── input.tsx
 │   │       ├── label.tsx
-│   │       ├── popover.tsx
+│   │       ├── navigation-menu.tsx
+│   │       ├── pagination.tsx
 │   │       ├── select.tsx
 │   │       ├── skeleton.tsx
 │   │       ├── sonner.tsx
-│   │       └── textarea.tsx
-│   ├── 📁context   // React context providers
+│   │       └── table.tsx
+│   ├── 📁context
 │   │   └── ThemeContext.tsx
-│   ├── 📁data   // Data configuration
+│   ├── 📁data
 │   │   ├── index.ts
 │   │   └── ProfileData.ts
-│   ├── 📁hooks   // Custom hooks
-│   │   ├── index.ts
-│   │   └── useMemoCard.tsx
-│   ├── 📁interfaces  // TypeScript interfaces
+│   ├── 📁hooks
+│   │   └── index.ts
+│   ├── 📁interfaces
+│   │   ├── base.interface.ts
+│   │   ├── counterStore.interface.ts
+│   │   ├── dragonball.interface.ts
 │   │   ├── index.ts
 │   │   ├── profile-card.interface.ts
+│   │   ├── table.interface.ts
 │   │   └── theme.interface.ts
-│   ├── 📁lib   // Library functions
-│   │   └── utils.ts    // Utility functions
-│   ├── 📁public    // Public assets
-│   │   ├── 📁assets    // Static assets
+│   ├── 📁lib
+│   │   ├── api.ts
+│   │   ├── index.ts
+│   │   └── utils.ts
+│   ├── 📁public
+│   │   ├── 📁assets
 │   │   │   └── 📁images
 │   │   │       └── profile.jpg
-│   │   ├── 📁images    // Image assets
+│   │   ├── 📁images
 │   │   │   ├── logo.svg
 │   │   │   └── react.svg
-│   │   ├── 📁styles    // CSS Styles directory
+│   │   ├── 📁styles
 │   │   │   └── globals.css
-│   │   └── index.html    // Main HTML file
-│   ├── 📁store    // Global state management (Zustand)
-│   ├── 📁types   // TypeScript type definitions
+│   │   └── index.html
+│   ├── 📁Routes
+│   │   ├── characters.tsx
+│   │   ├── index.tsx
+│   │   ├── profile.tsx
+│   │   └── __root.tsx
+│   ├── 📁store
+│   │   ├── counterStore.ts
+│   │   └── index.ts
+│   ├── 📁types
 │   │   ├── index.ts
+│   │   ├── limit.type.ts
 │   │   └── theme.type.ts
-│   ├── APITester.tsx   // API testing component
-│   ├── App.tsx   // Main application component
-│   ├── declarations.d.ts // Type declarations
-│   ├── index.ts    // Entry point for the application
-│   └── main.tsx    // Main entry file for the React application
-├── .gitignore    // Git ignore file
-├── build.ts    // Build script
-├── bun-env.d.ts    // Type definitions for Bun environment
-├── bun.lock    // Bun lock file
-├── bunfig.toml   // Bun configuration file
-├── components.json   // Shadcn Components configuration
-├── package.json    // Project configuration
-├── README.md   // Project documentation
-└── tsconfig.json   // TypeScript configuration
-
+│   ├── APITester.tsx
+│   ├── App.tsx
+│   ├── declarations.d.ts
+│   ├── index.ts
+│   ├── main.tsx
+│   └── routeTree.gen.ts
+├── .gitignore
+├── build.ts
+├── bun-env.d.ts
+├── bun.lock
+├── bunfig.toml
+├── components.json
+├── package.json
+├── README.md
+└── tsconfig.json
 ```
