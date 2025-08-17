@@ -1,15 +1,37 @@
 import type { ThemeContextType } from '@/interfaces';
 import  type {theme} from '@/types';
-import { createContext, useContext, useMemo, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider = ({children}:{children:ReactNode}) =>{
- const [theme, setTheme] = useState<theme>("light");
+
+    const getDefaultTheme = () : theme =>  {
+        if ( typeof window !== "undefined" && localStorage.getItem("theme")) {
+            return localStorage.getItem("theme") as theme;
+        }
+        return "light";
+    }
+
+ const [theme, setTheme] = useState<theme>(getDefaultTheme());
+
+
+ const setLocalStorageTheme = (theme:theme) => {
+    if(typeof window !== "undefined") {
+    localStorage.setItem("theme", theme);
+    }
+ }
+
+
  const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark":"light" ));
+    setLocalStorageTheme(theme === "light" ? "dark":"light");
     document.documentElement.classList.toggle("dark");
  };
+
+ useEffect(() => {
+    setLocalStorageTheme(theme);
+ }, []);
 
  const value = useMemo(()=>({theme, toggleTheme}),[theme]);
 
