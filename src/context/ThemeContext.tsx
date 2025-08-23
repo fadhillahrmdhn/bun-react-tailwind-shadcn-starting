@@ -1,14 +1,15 @@
 import type { ThemeContextType } from '@/interfaces';
-import  type {theme} from '@/types';
+import  type {theme, ThemeStorageKey} from '@/types';
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+const themeStorageKey: ThemeStorageKey = 'theme';
 
 export const ThemeProvider = ({children}:{children:ReactNode}) =>{
 
     const getDefaultTheme = () : theme =>  {
-        if ( typeof window !== "undefined" && localStorage.getItem("theme")) {
-            return localStorage.getItem("theme") as theme;
+        if ( typeof window !== "undefined" && localStorage.getItem(themeStorageKey)) {
+            return localStorage.getItem(themeStorageKey) as theme;
         }
         return "light";
     }
@@ -18,7 +19,7 @@ export const ThemeProvider = ({children}:{children:ReactNode}) =>{
 
  const setLocalStorageTheme = (theme:theme) => {
     if(typeof window !== "undefined") {
-    localStorage.setItem("theme", theme);
+    localStorage.setItem(themeStorageKey, theme);
     }
  }
 

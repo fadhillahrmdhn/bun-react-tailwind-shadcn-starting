@@ -2,9 +2,10 @@ import { create } from 'zustand';
 import { api2 } from '@/lib';
 import Cookies from 'js-cookie';
 import type { AuthMe, AuthState, AuthUser, LoginFormValues, LoginResponse } from '@/interfaces';
-import type { CookieType } from '@/types';
+import type { CookieType, ThemeStorageKey,  } from '@/types';
 
 const cookieName: CookieType = 'accessToken';
+const themeStorageKey: ThemeStorageKey = 'theme';
 
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
@@ -89,6 +90,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   logout: () => {
     // 1. Hapus token otentikasi dari cookie browser.
     Cookies.remove(cookieName);
+    localStorage.removeItem(themeStorageKey);
 
     // 2. Atur ulang state otentikasi di Zustand ke kondisi awal (tidak login).
     set({
