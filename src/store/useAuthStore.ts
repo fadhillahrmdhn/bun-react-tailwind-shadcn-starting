@@ -45,6 +45,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 
       // 7. Jika berhasil, perbarui state global sebagai "sudah login"
       set({ user, isAuthenticated: true });
+      console.log('Login successful, user data fetched:', response);
       return res.data;
     } catch (error) {
       // 8. Jika terjadi error (misal: login gagal), bersihkan state
