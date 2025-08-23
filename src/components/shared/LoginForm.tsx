@@ -7,20 +7,22 @@ import { toast } from 'sonner';
 import { Checkbox } from '@/components/ui/checkbox';
 import type { LoginFormValues } from '@/interfaces';
 import { z } from 'zod';
-import { api2 } from '@/lib';
-import Cookies from 'js-cookie';
+import { useNavigate } from '@tanstack/react-router';
+import { useAuthStore } from '@/store';
 
-const userSchema = z.object({
-  email: z.string().email({ message: 'Invalid email address' }),
+const loginSchema = z.object({
+  email: z.email({ message: 'Invalid email address' }),
   password: z
     .string()
     .min(8, { message: 'Password must be at least 8 characters long' })
     .max(24, { message: 'Password must not exceed 24 characters' })
-    .regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).+$/, { message: 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character' }),
+    .regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).+$/, { message: 'Ppassword must contain at least one uppercase letter, one lowercase letter, one number, and one special character' }),
   rememberMe: z.boolean(),
 });
 
-export default function LoginForm() {
+export function LoginForm() {
+  const navigate = useNavigate();
+  const { login } = useAuthStore();
   // dibawah ini merupakan nilai default untuk form login dengan cara memanggil userSchema.parse({})
   const defaultValues: LoginFormValues = {
     email: '',
@@ -28,44 +30,30 @@ export default function LoginForm() {
     rememberMe: false,
   };
 
+  const onSubmit = async ({ value }: { value: LoginFormValues }) => {
+    try {
+      const res = await login({ value });
+      toast.success('Login Successful!', {
+        description: res.message,
+        duration: 3000,
+      });
+      navigate({ to: '/dashboard' });
+    } catch (error) {
+      toast.error('Login Failed!', {
+        description: `Please check your credentials and try again.`,
+        duration: 3000,
+      });
+      console.error(error);
+      return;
+    }
+  };
+
   const form = useForm({
     defaultValues,
     validators: {
-      onChange: userSchema,
+      onSubmit: loginSchema,
     },
-
-    onSubmit: async ({ value }) => {
-      api2
-        .post('/auth/login', value)
-        .then((response) => {
-          const token: string = response.data.data.accessToken;
-          // localStorage.setItem('accessToken', token);
-          // console.log('Token saved:', response.data.data.accessToken);
-
-          /**
-           * @remarks
-           * `{expires?: number}` mendefinisikan sebuah objek yang boleh memiliki
-           * (atau tidak memiliki) properti bernama `expires`. Jika properti tersebut
-           * ada, nilainya harus berupa angka.
-           */
-          const cookieOptions: { expires?: number } = {};
-          if (value.rememberMe) {
-            cookieOptions.expires = 7;
-          }
-          Cookies.set('accessToken', token, cookieOptions);
-          toast.success('Login Successful!', {
-            description: `Welcome,You have successfully logged in.`,
-            duration: 3000,
-          });
-        })
-        .catch((error) => {
-          toast.error('Login Failed!', {
-            description: `Please check your credentials and try again.`,
-            duration: 3000,
-          });
-        });
-      console.log('Form submitted:', value);
-    },
+    onSubmit,
   });
 
   return (
@@ -89,6 +77,12 @@ export default function LoginForm() {
                   Email
                 </Label>
                 <Input id="email" type="email" value={field.state.value} onChange={(e) => field.handleChange(e.target.value)} />
+
+                {field.state.meta.errors && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {Array.isArray(field.state.meta.errors) ? field.state.meta.errors.map((error) => (typeof error === 'string' ? error : error?.message || 'Unknown error')).join(', ') : String(field.state.meta.errors)}
+                  </p>
+                )}
               </div>
             )}
           </form.Field>
@@ -101,6 +95,11 @@ export default function LoginForm() {
                   Password
                 </Label>
                 <Input id="password" type="password" value={field.state.value} onChange={(e) => field.handleChange(e.target.value)} />
+                {field.state.meta.errors && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {Array.isArray(field.state.meta.errors) ? field.state.meta.errors.map((error) => (typeof error === 'string' ? error : error?.message || 'Unknown error')).join(', ') : String(field.state.meta.errors)}
+                  </p>
+                )}
               </div>
             )}
           </form.Field>
