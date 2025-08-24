@@ -1,12 +1,12 @@
 import Typewriter from 'typewriter-effect';
 import AuthLayout from '@/page/auth/AuthLayout';
-import { DragonBall } from '@/components/shared';
+import { AllUsers} from '@/components/shared';
 
 
 export const DashboardPage = () => {
     return (
     <AuthLayout>
-      <DragonBall />
+      <AllUsers />
     </AuthLayout>
     );
 }
