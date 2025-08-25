@@ -1,8 +1,7 @@
-import { useMemo, useState, useCallback, useEffect } from 'react';
-import type { GetAllUserResponse, UserEntity } from '@/interfaces';
-import { SearchBar, ButtonTheme } from '@/components/shared';
+import {useState, useEffect } from 'react';
+import type { GetAllUserResponse} from '@/interfaces';
+import { ButtonTheme } from '@/components/shared';
 import { Skeleton } from '@/components/ui/skeleton';
-import { api } from '@/lib/api';
 import { columnsUser } from './columns';
 import { DataTableUsers } from './data-table';
 import { useQuery } from '@tanstack/react-query';
@@ -10,14 +9,14 @@ import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, Pagi
 import { useUserStore } from '@/store/useUserStore';
 
 import { toast } from 'sonner';
-import { get } from 'react-hook-form';
 
 export const AllUsers = () => {
   const [limit, setLimit] = useState<number>(10);
   const [page, setPage] = useState<number>(1);
+  const { getUsers } = useUserStore();
 
-  const getAllUsersData = useCallback(async (): Promise<GetAllUserResponse> => {
-    const { getUsers } = useUserStore();
+  const getAllUsersData = async (): Promise<GetAllUserResponse> => {
+
     const fallback: GetAllUserResponse = {
       message: '',
       statusCode: 200,
@@ -40,7 +39,7 @@ export const AllUsers = () => {
       console.error('Error fetching User data:', error);
       throw error;
     }
-  }, [page, limit]);
+  };
 
   const { isPending, isError, data, error } = useQuery({
     queryKey: ['users', page, limit],
@@ -69,6 +68,8 @@ export const AllUsers = () => {
   const handlePageClick = (pageNumber: number): void => {
     setPage(pageNumber);
   };
+
+  console.log(data?.data.entities)
 
   return (
     <div className="grid grid-cols-1 gap-10">
