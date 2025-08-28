@@ -69,7 +69,6 @@ export const AllUsers = () => {
     setPage(pageNumber);
   };
 
-  console.log(data?.data.entities)
 
   return (
     <div className="grid grid-cols-1 gap-10">

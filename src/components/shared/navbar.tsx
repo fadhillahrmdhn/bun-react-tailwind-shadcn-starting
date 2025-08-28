@@ -14,28 +14,26 @@ export function Navbar() {
   };
 
   return (
-    <NavigationMenu viewport={false}>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link to="/">Home</Link>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
+    <NavigationMenu className="w-full max-w-none justify-between p-4" viewport={false}>
 
-        {isAuthenticated ? (
-          <>
-            <NavigationMenuItem>
-              <Button variant="destructive" onClick={handleLogout}>
-                <LogOut className="mr-2 h-4 w-4" />
-                Logout
-              </Button>
-            </NavigationMenuItem>
-          </>
-        ) : (
+      <NavigationMenuList>
+        {!isAuthenticated && (
           <NavigationMenuItem>
             <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
               <Link to="/login">Login</Link>
             </NavigationMenuLink>
+          </NavigationMenuItem>
+        )}
+      </NavigationMenuList>
+
+
+      <NavigationMenuList>
+        {isAuthenticated && (
+          <NavigationMenuItem>
+            <Button variant="destructive" onClick={handleLogout}>
+              <LogOut className="mr-2 h-4 w-4" />
+              Logout
+            </Button>
           </NavigationMenuItem>
         )}
       </NavigationMenuList>
