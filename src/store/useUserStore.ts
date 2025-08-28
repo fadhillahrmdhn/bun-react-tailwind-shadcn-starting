@@ -1,6 +1,7 @@
 import type { UserStore, GetAllUserResponse, UserEntity } from '@/interfaces';
 import { create } from 'zustand';
 import { api2 } from '@/lib';
+import {mockUserData} from '@/data'
 
 export const useUserStore = create<UserStore>((set) => ({
   users: [],
@@ -16,6 +17,7 @@ export const useUserStore = create<UserStore>((set) => ({
           limit: limit,
         },
       });
+      // const response = mockUserData;
       const data = response.data;
       set({ users: data.data.entities });
       return data;
