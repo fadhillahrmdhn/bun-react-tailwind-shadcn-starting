@@ -8,10 +8,6 @@ import type { UserEntity } from "@/interfaces"
 
 export const columnsUser: ColumnDef<UserEntity>[] = [
   {
-    accessorKey: "id",
-    header: "ID",
-  },
-  {
     accessorKey: "name",
     header: "Name",
   },
@@ -22,5 +18,9 @@ export const columnsUser: ColumnDef<UserEntity>[] = [
   {
     accessorKey: "role",
     header: "Role",
+  },
+    {
+    accessorKey: "id",
+    header: "ID",
   }
 ]
