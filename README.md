@@ -1,6 +1,7 @@
-# Dragon Ball Z Character Hub & Profile Dashboard
+# Admin Dashboard with Authentication & Authorization
 
-**Dragon Ball Z Character Hub & Profile Dashboard** is a responsive web application built with a modern React stack, including React 19, TypeScript, and Tailwind CSS. This project focuses on implementing routing, data fetching, state management, and table views using TanStack and Shadcn UI, enhanced with Skeleton for displaying placeholders while data is being fetched, as well as toast notifications to inform users of any errors.
+**Admin Dashboard** is a modern React + Shadcn UI web app with built-in authentication and role-based authorization.
+It’s designed to help you manage user data easily, with a clean responsive layout, smooth user experience, and solid security.
 
 ---
 
@@ -22,12 +23,13 @@
 
 ## :sparkles: Features
 
-- [x] **Character Table** -  Explore Dragon Ball characters in a table powered by TanStack Table.
-- [x] **Loading Skeleton** - Smooth loading experience with Shadcn skeleton components during data fetching
-- [x] **Dark/Light Theme Toggle** - Theme switching functionality
-- [x] **Responsive Design** - Optimal display on desktop and mobile devices
-- [x] **Toast Notification** - Display notifications to users when an error happens.
-- [x] **Profile Page** - "Display the user profile page.
+- [x] **Authentication** – Login  with validation
+- [x] **Authorization** – Role-based access control
+- [x] **User Table** – Table of users with pagination
+- [x] **Loading Skeleton** – Smooth loading experience with Shadcn skeleton components
+- [x] **Dark/Light Theme Toggle** – Switch between dark and light themes
+- [x] **Responsive Design** – Optimized for desktop & mobile devices
+- [x] **Toast Notification** – Error and action notifications using Sonner
 
 ---
 
@@ -35,26 +37,17 @@
 
 Here are some preview images of the app:
 
-### :desktop_computer: Character Table
+### :desktop_computer: Login
 
-![Dragon Ball character table](/docs/images/table.png)
+![Login page view](/docs/images/login.png)
 
+### :desktop_computer: Dashboard (Light Mode)
 
-### :iphone: Mobile view  of Character Table
+![Dashboard view](/docs/images/dashboard_lightmode.png)
 
-![Mobile view](/docs/images/mobile_pagination.png)
+### :desktop_computer: Dashboard (Dark Mode)
 
-### :hourglass_flowing_sand: Loading Skeleton
-
-![Loading skeleton demonstration during data fetching](/docs/images/Skeleton.png)
-
-### :desktop_computer: Toast Notification
-
-![Toast notification demonstration](/docs/images/toast.png)
-
-### :desktop_computer: Profile Page
-
-![Profile page view](/docs/images/profile.png)
+![Dashboard view](/docs/images/dashboard_darkmode.png)
 
 ---
 
@@ -91,12 +84,15 @@ bun start
 ```plaintext
 ├── 📁docs         // Documentation assets
 │   └── 📁images
-│       ├── home.png               // Home page screenshot
-│       ├── mobile_pagination.png  // Mobile pagination screenshot
-│       ├── profile.png            // Profile page screenshot
-│       ├── Skeleton.png           // Loading skeleton screenshot
-│       ├── table.png              // Table component screenshot
-│       └── toast.png              // Toast notification screenshot
+│       ├── dashboard_darkmode.png
+│       ├── dashboard_lightmode.png
+│       ├── home.png
+│       ├── login.png
+│       ├── mobile_pagination.png
+│       ├── profile.png
+│       ├── Skeleton.png
+│       ├── table.png
+│       └── toast.png
 ├── 📁src   // Main source directory
 │   ├── 📁components
 │   │   ├── 📁shared
@@ -105,6 +101,12 @@ bun start
 │   │   │   │   ├── data-table.tsx
 │   │   │   │   ├── FetchDragonBall.tsx
 │   │   │   │   └── index.ts
+│   │   │   ├── 📁users
+│   │   │   │   ├── columns.tsx
+│   │   │   │   ├── data-table.tsx
+│   │   │   │   ├── FetchUsers.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── authinitializer.tsx
 │   │   │   ├── AvatarCustom.tsx
 │   │   │   ├── ButtonCustom.tsx
 │   │   │   ├── ButtonTheme.tsx
@@ -113,6 +115,7 @@ bun start
 │   │   │   ├── CounterDisplay.tsx
 │   │   │   ├── CounterZustand.tsx
 │   │   │   ├── index.ts
+│   │   │   ├── LoginForm.tsx
 │   │   │   ├── navbar.tsx
 │   │   │   ├── ProfileCard.tsx
 │   │   │   ├── SearchBar.tsx
@@ -121,6 +124,7 @@ bun start
 │   │       ├── avatar.tsx
 │   │       ├── button.tsx
 │   │       ├── card.tsx
+│   │       ├── checkbox.tsx
 │   │       ├── form.tsx
 │   │       ├── input.tsx
 │   │       ├── label.tsx
@@ -134,13 +138,21 @@ bun start
 │   │   └── ThemeContext.tsx
 │   ├── 📁data
 │   │   ├── index.ts
+│   │   ├── mockUserData.ts
 │   │   └── ProfileData.ts
+│   ├── 📁enums
+│   │   ├── index.ts
+│   │   └── role.enum.ts
 │   ├── 📁hooks
-│   │   └── index.ts
+│   │   ├── index.ts
+│   │   └── useInitAuth.tsx
 │   ├── 📁interfaces
+│   │   ├── auth.interface.ts
 │   │   ├── base.interface.ts
 │   │   ├── counterStore.interface.ts
 │   │   ├── dragonball.interface.ts
+│   │   ├── form-login.interface.ts
+│   │   ├── getalluser.interface.ts
 │   │   ├── index.ts
 │   │   ├── profile-card.interface.ts
 │   │   ├── table.interface.ts
@@ -149,6 +161,15 @@ bun start
 │   │   ├── api.ts
 │   │   ├── index.ts
 │   │   └── utils.ts
+│   ├── 📁page
+│   │   ├── 📁auth
+│   │   │   ├── 📁login
+│   │   │   │   └── LoginPage.tsx
+│   │   │   ├── 📁register
+│   │   │   │   └── RegisterPage.tsx
+│   │   │   └── AuthLayout.tsx
+│   │   └── 📁dashboard
+│   │       └── DashboardPage.tsx
 │   ├── 📁public
 │   │   ├── 📁assets
 │   │   │   └── 📁images
@@ -161,16 +182,23 @@ bun start
 │   │   └── index.html
 │   ├── 📁Routes
 │   │   ├── characters.tsx
+│   │   ├── dashboard.tsx
 │   │   ├── index.tsx
+│   │   ├── login.tsx
 │   │   ├── profile.tsx
+│   │   ├── register.tsx
 │   │   └── __root.tsx
 │   ├── 📁store
 │   │   ├── counterStore.ts
-│   │   └── index.ts
+│   │   ├── index.ts
+│   │   ├── useAuthStore.ts
+│   │   └── useUserStore.ts
 │   ├── 📁types
+│   │   ├── cookietype.ts
 │   │   ├── index.ts
 │   │   ├── limit.type.ts
-│   │   └── theme.type.ts
+│   │   ├── theme.type.ts
+│   │   └── themeStorageKey.type.ts
 │   ├── APITester.tsx
 │   ├── App.tsx
 │   ├── declarations.d.ts
